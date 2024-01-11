@@ -30,24 +30,32 @@ const unlikeRestaurant = async (req,res)=>{
 }
 
 const getListLikeByUser = async (req, res)=>{
+    let {user_id} = req.body
     let data = await conn.users.findAll({
         include:
             {
             model: like_res,
             as: 'like_res',
             
+        },
+        where: {
+            user_id
         }
     })
     res.send(data)
 };
 
 const getListRateByUser = async (req, res)=>{
+    let {user_id} = req.body
     let data = await conn.users.findAll({
         include:
             {
             model: rate_res,
             as: 'rate_res',
             
+        },
+        where: {
+            user_id
         }
     })
     res.send(data)
